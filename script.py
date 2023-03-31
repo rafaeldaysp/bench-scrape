@@ -37,7 +37,7 @@ def run(product, Retailer):
                     best_discount_amount = discount
         data['coupon_id'] = best_coupon_id
         data['price'] = int((price - best_discount_amount)*100)
-        if data['price'] != product['price']:
+        if data['price'] != product['price']  or data['available'] != product['available']:
             response = api.update_product_retailers(product['id'], retailer_id, data)
     else:
         data['available'] = False
