@@ -38,5 +38,6 @@ class Kabum:
             price = float(site.find('h4', class_=re.compile('finalPrice')).text[3:].replace('.', '').replace(',', '.'))
             store = site.find('div', class_=re.compile('generalInfo')).find('b').text
         except Exception as e:
+            print(site)
             print(e) 
         return price, store
