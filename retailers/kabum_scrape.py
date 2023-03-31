@@ -10,7 +10,7 @@ class Kabum:
 
     def get_response(self, url):
             ua = str(UserAgent().chrome)
-            headers = {'User-Agent': ua, 'Accept-Language': 'pt-br,en;q=0.8'}
+            headers = {'User-Agent': ua, 'Accept-Language': 'pt-br,en;q=0.8', 'Accept-Encoding': 'br, gzip, deflate', 'Accept': 'test/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
             r = requests.get(url, headers=headers)
             return r
 
