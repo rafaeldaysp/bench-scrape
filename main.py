@@ -124,8 +124,6 @@ if __name__ == '__main__':
             magaluparceiroTrigger()
         if sys.argv[1] == '--nave':
             naveTrigger()
-        else:
-            print('Error: Retailer not found.')
     except:
         print('Retailer name required. Ex: --retailer')
     
