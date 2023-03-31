@@ -1,6 +1,5 @@
 import sys
 from retailers import aliexpress_scrape, acer_scrape, amazon_scrape, avell_scrape, carrefour_scrape, casasbahia_scrape, girafa_scrape, kabum_scrape, lenovo_scrape, magalu_af_scrape, nave_scrape
-from apscheduler.schedulers.blocking import BlockingScheduler
 from api import api
 import concurrent.futures
 import script
@@ -9,14 +8,10 @@ from requests_html import HTMLSession
 
 def aliexpressTrigger():
     Retailer = aliexpress_scrape.AliExpress()
-    sched = BlockingScheduler()
-
-    @sched.scheduled_job('interval', seconds=10)
-    def timed_job():
-        print('Starting scrape...')
-        products = api.get_retailer_products(Retailer.retailer_id)
-        concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products))
-    sched.start()
+    products = api.get_retailer_products(Retailer.retailer_id)
+    # for product in products:
+    #     script.run(product, Retailer)
+    concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products))
     
 def acerTrigger():
     Retailer = acer_scrape.Acer()
