@@ -77,7 +77,7 @@ def kabumTrigger():
     products = api.get_retailer_products(Retailer.retailer_id)
     for product in products:
         script.run(product, Retailer)
-    #concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products))
+    concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products))
 
 def lenovoTrigger():
     Retailer = lenovo_scrape.Lenovo()
