@@ -45,9 +45,9 @@ def avellTrigger():
 
 def carrefourTrigger():
     Retailer = carrefour_scrape.Carrefour()
-    #products = api.get_retailer_products(Retailer.retailer_id)
-    for product in products:
-        script.run(product, Retailer)
+    products = api.get_retailer_products(Retailer.retailer_id)
+    # for product in products:
+    #     script.run(product, Retailer)
     concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products))
 
 def casasbahiaTrigger():
@@ -101,7 +101,7 @@ def naveTrigger():
     concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products))
 
 if __name__ == '__main__':
-    try:
+    
         if sys.argv[1] == '--aliexpress':
             aliexpressTrigger()
         if sys.argv[1] == '--acer':
@@ -124,6 +124,5 @@ if __name__ == '__main__':
             magaluparceiroTrigger()
         if sys.argv[1] == '--nave':
             naveTrigger()
-    except:
-        print('Retailer name required. Ex: --retailer')
+    
     
