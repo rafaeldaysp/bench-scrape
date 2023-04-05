@@ -11,7 +11,7 @@ def run(product, Retailer):
         print('Erro em: ', product['title'])
         return
     if not full_price:
-        full_price = price
+        full_price = [price]
     if price > 0:
         data['available'] = True
         data['price'] = int(price*100)
