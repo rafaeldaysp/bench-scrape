@@ -42,7 +42,7 @@ class AliExpress:
                         return False, False
                 if price_info[i]['skuVal']['availQuantity'] == 0:
                     return -1, store
-        price_float_value = float(price[3:].replace('.', '').replace(',', '.'))
+        price_float_value = float(price[3:].replace(',', ''))
         full_price = price_float_value
         try:
             slogan_banner = data['middleBannerModule']['uniformMiddleBanner']['sloganBanner']
@@ -127,8 +127,9 @@ class AliExpress:
         #     #print(f'Erro no scraping do produto: {url}, de sku: {sku_id}')
         #     print(e, url)
         #     price = -2
+        print(price)
         return price, store, full_price
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://pt.aliexpress.com/item/1005001917503805.html?spm=a2g0o.store_pc_groupList.8148356.7.a1347ecaSHa2sX&pdp_npi=2%40dis%21BRL%21R%24%20542%2C55%21R%24%20379%2C78%21%21%21%21%21%40210318bb16802330334177860e3d71%2112000032427295988%21sh', sku = '12000032427295988'))
+    print(aliexpress.scrape('https://pt.aliexpress.com/item/1005005111459087.html?spm=a2g0o.detail.1000060.3.2bf117591T3dql&gps-id=pcDetailBottomMoreThisSeller&scm=1007.13339.291025.0&scm_id=1007.13339.291025.0&scm-url=1007.13339.291025.0&pvid=2b7f888d-b5aa-4656-bc2e-2daadfad4330&_t=gps-id%3ApcDetailBottomMoreThisSeller%2Cscm-url%3A1007.13339.291025.0%2Cpvid%3A2b7f888d-b5aa-4656-bc2e-2daadfad4330%2Ctpp_buckets%3A668%232846%238107%231934&pdp_npi=3%40dis%21BRL%211599.93%211119.92%21%21%21%21%21%402101c5c316811416439292861eb7b7%2112000031699407428%21rec%21BR%211679207800&gatewayAdapt=glo2bra', sku = '12000031699407428'))
