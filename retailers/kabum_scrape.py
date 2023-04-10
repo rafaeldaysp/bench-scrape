@@ -9,8 +9,12 @@ class Kabum:
         self.retailer_id = '8ec7eb4c-22bb-48fa-a819-7690838430d7'
 
     def get_response(self, url):
-            ua = str(UserAgent().chrome)
-            headers = {'User-Agent': ua, 'Accept-Language': 'pt-br,en;q=0.8', 'Accept-Encoding': 'br, gzip, deflate', 'Accept': 'test/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
+            headers =headers = { 
+			"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", 
+			"accept-encoding": "gzip, deflate, br", 
+			"accept-language": "en", 
+			"user-agent": str(UserAgent().chrome), 
+		}
             r = requests.get(url, headers=headers)
             return r
 
