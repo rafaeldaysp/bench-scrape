@@ -6,7 +6,7 @@ from fake_useragent import UserAgent
 
 class Kabum:
     def __init__(self) -> None:
-        self.retailer_id = '8ec7eb4c-22bb-48fa-a819-7690838430d7'
+        self.retailer_id = 'a86c4af6-572f-482c-8dff-50914970e427'
 
     def get_response(self, url):
             headers = { 

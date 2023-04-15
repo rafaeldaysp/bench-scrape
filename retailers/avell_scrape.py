@@ -4,7 +4,7 @@ from fake_useragent import UserAgent
 
 class Avell:
     def __init__(self) -> None:
-        self.retailer_id = 'a38452e7-e220-4be1-9ecf-8419cec3828c'
+        self.retailer_id = 'd95b62cd-78c0-465f-8d6e-80151c3c567e'
     def coupon_validation(self, description, product):
         return True
 

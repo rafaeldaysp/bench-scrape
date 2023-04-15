@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 class AliExpress:
     def __init__(self) -> None:
-        self.retailer_id = 'f73058a4-4838-4c1b-ad0b-0ac9b69a08ad'
+        self.retailer_id = '39b03799-2054-4c80-a015-bd1b76358c57'
     def get_response(self, url):
         ua = str(UserAgent().chrome)
         headers = {'User-Agent': ua}

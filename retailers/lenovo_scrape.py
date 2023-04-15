@@ -5,7 +5,7 @@ from fake_useragent import UserAgent
 url = 'https://click.linksynergy.com/deeplink?id=HWP*/f3BEF0&mid=47364&murl=https%3A%2F%2Fwww.lenovo.com%2Fbr%2Fpt%2Flaptops%2Flaptops-legion%2Flegion-5-series%2FLegion-5i-Gen-7-15-inch-Intel%2Fp%2FLEN101G0016%3F'
 class Lenovo:
     def __init__(self) -> None:
-         self.retailer_id = 'a730ee55-a54f-49b6-bd7b-38e73aff0b71'
+         self.retailer_id = '87417cba-be9a-49c4-91a2-ed930d7dca2f'
 
     def coupon_validation(self, description, product):
         return True

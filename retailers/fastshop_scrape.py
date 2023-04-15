@@ -5,7 +5,7 @@ from fake_useragent import UserAgent
 
 class Fastshop:
     def __init__(self) -> None:
-         self.retailer_id = '5839a173-aff7-49a5-8ce4-cf51e4c54996'
+         self.retailer_id = '601079a1-a602-4768-b395-9df49525c52d'
     def coupon_validation(self, description, product):
         return True
 

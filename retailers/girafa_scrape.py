@@ -6,7 +6,7 @@ import json
 
 class Girafa:
     def __init__(self) -> None:
-        self.retailer_id = 'b28ea917-ad45-4be5-9d39-7ee97c5363ed'
+        self.retailer_id = '1c970725-5764-48ba-b012-4f2e5ed3db7a'
 
     def coupon_validation(self, description, product):
         return True

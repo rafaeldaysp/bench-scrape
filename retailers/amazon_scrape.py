@@ -4,7 +4,7 @@ from fake_useragent import UserAgent
 
 class Amazon:
     def __init__(self) -> None:
-        self.retailer_id = '901aa976-1681-4072-9376-169cd5ab101b'
+        self.retailer_id = '04901ac7-2af9-42ad-8fb6-b3fe4e9bfea6'
     def coupon_validation(self, description, product):
         return True
 

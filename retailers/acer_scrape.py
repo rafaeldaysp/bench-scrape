@@ -6,7 +6,7 @@ from api import api
 
 class Acer:
     def __init__(self) -> None:
-        self.retailer_id = '1f10369f-f5fc-4925-b42f-e0349f37ca0f'
+        self.retailer_id = '54f99110-bc6a-4c4f-abf8-99299aba16dd'
     
     def get_response(self, url):
         ua = str(UserAgent().chrome)

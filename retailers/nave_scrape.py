@@ -5,7 +5,7 @@ import requests
 
 class Nave:
     def __init__(self) -> None:
-        self.retailer_id = '8dabd038-474b-417e-984c-207ee9d1bf98'
+        self.retailer_id = '4e872480-c21c-4e68-b2b0-9c0515d5819b'
 
     def get_response(self, url):
         ua = str(UserAgent().chrome)

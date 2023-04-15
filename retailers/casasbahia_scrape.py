@@ -3,7 +3,7 @@ import json
 
 class CasasBahia:
     def __init__(self) -> None:
-        self.retailer_id = '0fcb32e7-f651-4501-bd6a-1ab0aa95a2b1'
+        self.retailer_id = '3a72a19e-54d9-45c5-ac34-1f3a2be5fb30'
     def coupon_validation(self, description, product):
         if description:
             description = json.loads(description)

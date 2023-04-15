@@ -5,7 +5,7 @@ import json
 
 class MagaluParceiro:
     def __init__(self) -> None:
-        self.retailer_id = 'c07992b8-dead-44c5-9dad-112588b1c0cf'
+        self.retailer_id = 'f4eaafb2-1e11-49b4-89e8-cc68c848ea84'
         
     def get_response(self, url):
             ua = str(UserAgent().chrome)
