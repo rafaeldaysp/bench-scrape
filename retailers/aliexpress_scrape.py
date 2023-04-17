@@ -128,7 +128,6 @@ class AliExpress:
         #     #print(f'Erro no scraping do produto: {url}, de sku: {sku_id}')
         #     print(e, url)
         #     price = -2
-        print(price)
         return price, store, full_price
 
 if __name__ == '__main__':
