@@ -24,9 +24,12 @@ class AliExpress:
         match = re.search(r'data: ({.+})', r.text).group(1)
         try:
             data = json.loads(match)
+        except Exception as e:
+            print("_____________________________MUDAR LINK DO PRODUTO ABAIXO__________________________")
+            return False, False
+        try:
             store = data['storeModule']['storeName']
         except Exception as e:
-            print(e, 'Mude o link desse produto.')
             return False, False
         price_info = data['skuModule']['skuPriceList']
         qtd_produtos = len(price_info)
