@@ -22,10 +22,11 @@ class AliExpress:
         store = None
         r = self.get_response(url)
         match = re.search(r'data: ({.+})', r.text).group(1)
-        data = json.loads(match)
         try:
+            data = json.loads(match)
             store = data['storeModule']['storeName']
-        except:
+        except Exception as e:
+            print(e, 'Mude o link desse produto.')
             return False, False
         price_info = data['skuModule']['skuPriceList']
         qtd_produtos = len(price_info)
@@ -132,4 +133,4 @@ class AliExpress:
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://pt.aliexpress.com/item/1005005111459087.html?spm=a2g0o.detail.1000060.3.2bf117591T3dql&gps-id=pcDetailBottomMoreThisSeller&scm=1007.13339.291025.0&scm_id=1007.13339.291025.0&scm-url=1007.13339.291025.0&pvid=2b7f888d-b5aa-4656-bc2e-2daadfad4330&_t=gps-id%3ApcDetailBottomMoreThisSeller%2Cscm-url%3A1007.13339.291025.0%2Cpvid%3A2b7f888d-b5aa-4656-bc2e-2daadfad4330%2Ctpp_buckets%3A668%232846%238107%231934&pdp_npi=3%40dis%21BRL%211599.93%211119.92%21%21%21%21%21%402101c5c316811416439292861eb7b7%2112000031699407428%21rec%21BR%211679207800&gatewayAdapt=glo2bra', sku = '12000031699407428'))
+    print(aliexpress.scrape('https://pt.aliexpress.com/item/1005003807598286.html?spm=a2g0o.store_pc_groupList.8148356.37.4930494bnKaqSC&pdp_npi=2%40dis%21BRL%21R%24%20593%2C13%21R%24%20189%2C82%21R%24%20189%2C82%21%21%21%21%402101e9d116817006179147639e51a1%2112000032207898711%21sh', sku = '12000032207898712'))
