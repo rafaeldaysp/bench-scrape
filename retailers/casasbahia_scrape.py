@@ -27,8 +27,8 @@ class CasasBahia:
             session2.close()
             price, store = [json_data['paymentMethodDiscount']['sellPriceWithDiscount'], json_data['sellers'][0]['name']]
         except Exception as e:
-            print('Scraping Casas Bahia bad request: ', e)
-            price = None
+            #print('Scraping Casas Bahia bad request: ', e)
+            price = -1
             #print(r.html.html)
             pass
         return price, store
