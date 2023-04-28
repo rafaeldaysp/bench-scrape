@@ -17,7 +17,7 @@ class Kabum:
 		}
             r = requests.get(url, headers=headers)
             return r
-
+    
     def coupon_validation(self, description, product):
         if description:
             description = json.loads(description)
@@ -42,6 +42,5 @@ class Kabum:
             price = float(site.find('h4', class_=re.compile('finalPrice')).text[3:].replace('.', '').replace(',', '.'))
             store = site.find('div', class_=re.compile('generalInfo')).find('b').text
         except Exception as e:
-            print(site)
-            print(e) 
+            price = -1
         return price, store

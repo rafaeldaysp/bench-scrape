@@ -2,6 +2,7 @@ import json
 import re
 import requests
 from fake_useragent import UserAgent
+from bs4 import BeautifulSoup
 
 class AliExpress:
     def __init__(self) -> None:
@@ -97,7 +98,7 @@ class AliExpress:
             shop_discounts.sort()
             shop_discounts_conditions.sort()
         except Exception as e:
-            pass
+            print(e)
         price_float_value -= shop_percent_discount_off    
         shop_discount_off = 0
         for i in range(len(shop_discounts)):

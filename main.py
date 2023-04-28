@@ -1,5 +1,5 @@
 import sys
-from retailers import aliexpress_scrape, acer_scrape, amazon_scrape, avell_scrape, carrefour_scrape, casasbahia_scrape, girafa_scrape, kabum_scrape, lenovo_scrape, magalu_af_scrape, nave_scrape, fastshop_scrape
+from retailers import aliexpress_scrape, acer_scrape, amazon_scrape, avell_scrape, carrefour_scrape, casasbahia_scrape, girafa_scrape, kabum_scrape, lenovo_scrape, magalu_af_scrape, nave_scrape, fastshop_scrape, dell_scrape, pontofrio_scrape
 from api import api
 import concurrent.futures
 import script
@@ -8,9 +8,9 @@ from requests_html import HTMLSession
 
 def multithreadingTrigger(Retailer):
     products = api.get_retailer_products(Retailer.retailer_id)
-    # for product in products:
-    #     script.run(product, Retailer)
-    concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products)) 
+    for product in products:
+        script.run(product, Retailer)
+    #concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products)) 
     
 def javascriptRenderTrigger(Retailer):
     ua = str(UserAgent().chrome)
@@ -46,4 +46,10 @@ if __name__ == '__main__':
            multithreadingTrigger(magalu_af_scrape.MagaluParceiro())
         if sys.argv[1] == '--nave':
             multithreadingTrigger(nave_scrape.Nave())
+        if sys.argv[1] == '--dell':
+            multithreadingTrigger(dell_scrape.Dell())
+        if sys.argv[1] == '--fastshop':
+            multithreadingTrigger(fastshop_scrape.Fastshop())
+        if sys.argv[1] == '--pontofrio':
+            javascriptRenderTrigger(pontofrio_scrape.PontoFio())
     

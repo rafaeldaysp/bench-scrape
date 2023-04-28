@@ -56,7 +56,7 @@ class Acer:
         preco = precos[0].text
         preco_value = float(preco[3:].replace('.', '').replace(',', '.'))
         #preco_com_cupom = preco_value - cupom_value ## Na versão final, fazer a comparação entre cupons a partir do banco de dados
-        preco_final_pix = preco_value*0.9
+        preco_final_pix = preco_value*0.88
         return preco_final_pix, 'Acer'
 
 if __name__ == '__main__':
