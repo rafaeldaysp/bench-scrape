@@ -98,7 +98,7 @@ class AliExpress:
             shop_discounts.sort()
             shop_discounts_conditions.sort()
         except Exception as e:
-            print(e)
+            pass
         price_float_value -= shop_percent_discount_off    
         shop_discount_off = 0
         for i in range(len(shop_discounts)):
@@ -134,4 +134,4 @@ class AliExpress:
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_DBSBp25', sku = '12000032033893862'))
+    print(aliexpress.scrape('https://pt.aliexpress.com/item/1005005071707765.html?aff_fcid=3109c7e8dfe64b58b1ae6113b3259d4d-1682945649078-04263-_DEvYzy1&tt=CPS_NORMAL&aff_fsk=_DEvYzy1&aff_platform=shareComponent-detail&sk=_DEvYzy1&aff_trace_key=3109c7e8dfe64b58b1ae6113b3259d4d-1682945649078-04263-_DEvYzy1&terminal_id=4ba0548134764b7786731ef60a8d595b&afSmartRedirect=y', sku = '12000031525007843'))
