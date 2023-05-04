@@ -17,6 +17,7 @@ class AliExpress:
         return True
 
     def scrape(self, url, **kwargs):
+        print(kwargs['sku'])
         sku_id = kwargs['sku']
         price = -1
         store = None
@@ -32,6 +33,7 @@ class AliExpress:
         except Exception as e:
             return False, False
         price_info = data['skuModule']['skuPriceList']
+        print(price_info)
         qtd_produtos = len(price_info)
         for i in range(0, qtd_produtos):
             if str(price_info[i]['skuId']) == sku_id:
@@ -46,7 +48,10 @@ class AliExpress:
                         return False, False
                 if price_info[i]['skuVal']['availQuantity'] == 0:
                     return -1, store
-        price_float_value = float(price[3:].replace(',', ''))
+        try:
+            price_float_value = float(price[3:].replace(',', ''))
+        except:
+            print('TROCAR SKU DO PRODUTO CUJO SKU ATUAL É: ', sku_id)
         try:
             slogan_banner = data['middleBannerModule']['uniformMiddleBanner']['sloganBanner']
             if slogan_banner == 'Preço exclusivo na primeira compra':
@@ -134,4 +139,4 @@ class AliExpress:
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://pt.aliexpress.com/item/1005005071707765.html?aff_fcid=3109c7e8dfe64b58b1ae6113b3259d4d-1682945649078-04263-_DEvYzy1&tt=CPS_NORMAL&aff_fsk=_DEvYzy1&aff_platform=shareComponent-detail&sk=_DEvYzy1&aff_trace_key=3109c7e8dfe64b58b1ae6113b3259d4d-1682945649078-04263-_DEvYzy1&terminal_id=4ba0548134764b7786731ef60a8d595b&afSmartRedirect=y', sku = '12000031525007843'))
+    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_Ddimgfj', sku = '12000032479084282'))
