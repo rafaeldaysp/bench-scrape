@@ -17,7 +17,6 @@ class AliExpress:
         return True
 
     def scrape(self, url, **kwargs):
-        print(kwargs['sku'])
         sku_id = kwargs['sku']
         price = -1
         store = None
@@ -33,7 +32,6 @@ class AliExpress:
         except Exception as e:
             return False, False
         price_info = data['skuModule']['skuPriceList']
-        print(price_info)
         qtd_produtos = len(price_info)
         for i in range(0, qtd_produtos):
             if str(price_info[i]['skuId']) == sku_id:
