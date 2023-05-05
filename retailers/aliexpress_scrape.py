@@ -49,7 +49,7 @@ class AliExpress:
         try:
             price_float_value = float(price[3:].replace(',', ''))
         except:
-            print('TROCAR SKU DO PRODUTO CUJO SKU ATUAL É: ', sku_id)
+            print('TROCAR SKU DO PRODUTO CUJO SKU ATUAL É: ' + sku_id + ' URL: ' + url)
         try:
             slogan_banner = data['middleBannerModule']['uniformMiddleBanner']['sloganBanner']
             if slogan_banner == 'Preço exclusivo na primeira compra':
@@ -137,4 +137,4 @@ class AliExpress:
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_Ddimgfj', sku = '12000032479084282'))
+    print(aliexpress.scrape('https://pt.aliexpress.com/item/1005004986859944.html?sourceType=562&aff_fcid=bd8dd71937d14d14b25153930f0623dd-1683310184331-07495-_DmYLJxB&tt=CPS_NORMAL&aff_fsk=_DmYLJxB&aff_platform=portals-tool&sk=_DmYLJxB&aff_trace_key=bd8dd71937d14d14b25153930f0623dd-1683310184331-07495-_DmYLJxB&terminal_id=4ba0548134764b7786731ef60a8d595b&afSmartRedirect=y', sku = '12000031248553159'))
