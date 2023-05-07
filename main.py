@@ -8,9 +8,12 @@ from requests_html import HTMLSession
 
 def multithreadingTrigger(Retailer):
     products = api.get_retailer_products(Retailer.retailer_id)
-    # for product in products:
-    #     script.run(product, Retailer)
-    concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products)) 
+    for product in products:
+        try:
+            script.run(product, Retailer)
+        except Exception as e:
+            print(e)
+    #concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products)) 
     
 def javascriptRenderTrigger(Retailer):
     ua = str(UserAgent().chrome)
