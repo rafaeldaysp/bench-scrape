@@ -32,14 +32,15 @@ class AliExpress:
         except Exception as e:
             return False, False
         price_info = data['skuModule']['skuPriceList']
+        #print(price_info)
         qtd_produtos = len(price_info)
         for i in range(0, qtd_produtos):
             if str(price_info[i]['skuId']) == sku_id:
                 try:
-                    price = price_info[i]['skuVal']['skuActivityAmount']['formatedAmount']
+                    price = price_info[i]['skuVal']['skuActivityAmount']['value']
                 except:
                     try:
-                        price = price_info[i]['skuVal']['skuAmount']['formatedAmount']
+                        price = price_info[i]['skuVal']['skuAmount']['value']
                     except Exception as e:
                         print(e)
                         print('Erro ao pegar o preço do produto.')
@@ -47,7 +48,7 @@ class AliExpress:
                 if price_info[i]['skuVal']['availQuantity'] == 0:
                     return -1, store
         try:
-            price_float_value = float(price[3:].replace(',', ''))
+            price_float_value = price
         except:
             print('TROCAR SKU DO PRODUTO CUJO SKU ATUAL É: ' + sku_id + ' URL: ' + url)
         try:
