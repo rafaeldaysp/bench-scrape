@@ -32,7 +32,6 @@ class AliExpress:
         except Exception as e:
             return False, False
         price_info = data['skuModule']['skuPriceList']
-        #print(price_info)
         qtd_produtos = len(price_info)
         for i in range(0, qtd_produtos):
             if str(price_info[i]['skuId']) == sku_id:
@@ -47,10 +46,10 @@ class AliExpress:
                         return False, False
                 if price_info[i]['skuVal']['availQuantity'] == 0:
                     return -1, store
-        try:
-            price_float_value = price
-        except:
+        price_float_value = price
+        if price_float_value == -1:
             print('_____________TROCAR SKU DO PRODUTO CUJO SKU ATUAL É: ' + sku_id + ' URL: ' + url)
+            return False, False
         try:
             slogan_banner = data['middleBannerModule']['uniformMiddleBanner']['sloganBanner']
             if slogan_banner == 'Preço exclusivo na primeira compra':
@@ -75,10 +74,10 @@ class AliExpress:
         try:
             all_coupons = data['couponModule']['webCouponInfo']['promotionPanelDTO']['shopCoupon'][0]['promotionPanelDetailDTOList']
             for coupon_info in all_coupons:
-                coupon_value = float(coupon_info['promotionDesc'][3:].replace(',', '.'))
+                coupon_value = float(coupon_info['promotionDesc'][2:].replace(',', '.'))
                 coupon_condition_str = coupon_info['promotionDetail']
                 index = coupon_condition_str.find('$')
-                coupon_condition_value = float(coupon_condition_str[index + 2:].replace(',', '.'))
+                coupon_condition_value = float(coupon_condition_str[index + 1:].replace(',', '.'))
                 coupons.append(coupon_value)
                 coupons_conditions.append(coupon_condition_value)
             coupons.sort()
@@ -94,8 +93,8 @@ class AliExpress:
                 all_discounts = all_discounts_list[i]['promotionDetailList']
                 if 'Tenha' in all_discounts[0]:
                     for discount in all_discounts:
-                        shop_discounts.append(float(discount[discount.find('$') + 2:discount.find('.') + 3]))
-                        shop_discounts_conditions.append(float(discount[discount.rfind('$') + 2: discount.rfind('.') + 3]))
+                        shop_discounts.append(float(discount[discount.find('$') + 1:discount.find(',') + 3].replace(',', '.')))
+                        shop_discounts_conditions.append(float(discount[discount.rfind('$') + 1: discount.rfind(',') + 3].replace(',', '.')))
                 if 'Compre 1 ' in all_discounts[0]:
                     percent_value = [float(x) for x in all_discounts[0][all_discounts[0].find('1') + 1:all_discounts[0].find('%')].split(' ') if x.isdigit()][0]
                     shop_percent_discount_off = round(price_float_value*percent_value/100, 2)
@@ -107,7 +106,7 @@ class AliExpress:
         shop_discount_off = 0
         for i in range(len(shop_discounts)):
             try:
-                if price_float_value > shop_discounts_conditions[i]:
+                if full_price > shop_discounts_conditions[i]:
                     shop_discount_off = shop_discounts[i]
             except Exception as e:
                 pass
@@ -115,7 +114,7 @@ class AliExpress:
         shop_coupon_off = 0
         for i in range(len(coupons)):
             try:
-                if price_float_value > coupons_conditions[i]:
+                if full_price > coupons_conditions[i]:
                     shop_coupon_off = coupons[i]
             except Exception as e:
                 pass
@@ -124,7 +123,7 @@ class AliExpress:
         try:
             coins_off_str = data['priceModule']['promotionSellingPointTags'][0]['elementList'][1]['textContent']
             coins_off_value = float(coins_off_str[0:coins_off_str.find('%')])/100
-            coins_off = coins_off_value*price_float_value
+            coins_off = coins_off_value*full_price
         except Exception as e:
             pass
         price_float_value -= coins_off
@@ -138,4 +137,4 @@ class AliExpress:
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://pt.aliexpress.com/item/1005004986859944.html?sourceType=562&aff_fcid=bd8dd71937d14d14b25153930f0623dd-1683310184331-07495-_DmYLJxB&tt=CPS_NORMAL&aff_fsk=_DmYLJxB&aff_platform=portals-tool&sk=_DmYLJxB&aff_trace_key=bd8dd71937d14d14b25153930f0623dd-1683310184331-07495-_DmYLJxB&terminal_id=4ba0548134764b7786731ef60a8d595b&afSmartRedirect=y', sku = '12000031248553159'))
+    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_Dev38Dx', sku = '12000031936107200'))
