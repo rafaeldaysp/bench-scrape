@@ -50,7 +50,7 @@ class AliExpress:
         try:
             price_float_value = price
         except:
-            print('TROCAR SKU DO PRODUTO CUJO SKU ATUAL É: ' + sku_id + ' URL: ' + url)
+            print('_____________TROCAR SKU DO PRODUTO CUJO SKU ATUAL É: ' + sku_id + ' URL: ' + url)
         try:
             slogan_banner = data['middleBannerModule']['uniformMiddleBanner']['sloganBanner']
             if slogan_banner == 'Preço exclusivo na primeira compra':
