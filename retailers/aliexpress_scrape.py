@@ -123,10 +123,16 @@ class AliExpress:
         price_float_value -= shop_coupon_off
         coins_off = 0
         try:
-            coins_off_str = data['priceModule']['promotionSellingPointTags'][0]['elementList'][1]['textContent']
+            for promotion in data['priceModule']['promotionSellingPointTags']:
+                
+                try:  
+                    coins_off_str = promotion['elementList'][1]['textContent']
+                except Exception as e:
+                    pass
+                    
             coins_off_value = float(coins_off_str[0:coins_off_str.find('%')])/100
             coins_off = coins_off_value*full_price
-        except Exception as e:
+        except Exception as e:    
             pass
         price_float_value -= coins_off
         price = round(price_float_value, 2)
@@ -139,4 +145,4 @@ class AliExpress:
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_DFrCWU5', sku = '12000028231766872'))
+    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_Dl9PRQD', sku = '12000031047942535'))
