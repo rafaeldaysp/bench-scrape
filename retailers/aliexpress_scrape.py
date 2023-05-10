@@ -2,7 +2,7 @@ import json
 import re
 import requests
 from fake_useragent import UserAgent
-from bs4 import BeautifulSoup
+import re
 
 class AliExpress:
     def __init__(self) -> None:
@@ -60,14 +60,16 @@ class AliExpress:
         promo_desc = 0
         try:
             promo_15_off_a_cada = data['couponModule']['webCouponInfo']['promotionPanelDTO']['acrossStoreFixedDiscount'][0]['promotionPanelDetailDTOList'][0]['promotionDesc'].replace('(', '').replace(')', '')
-            values_promo = [int(s) for s in promo_15_off_a_cada.split() if s.isdigit()]
+            regex = r'\d+'
+            values_promo = [int(num) for num in re.findall(regex, promo_15_off_a_cada)]
             promo_desc = int(price_float_value/values_promo[1])*values_promo[0]
+            
             if promo_desc > values_promo[2]:
                 promo_desc = values_promo[2]
-            price_float_value -= promo_desc
+            
         except:
             pass
-        
+        price_float_value -= promo_desc
         coupons = []
         coupons_conditions = []
     
@@ -137,4 +139,4 @@ class AliExpress:
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_Dev38Dx', sku = '12000031936107200'))
+    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_DFrCWU5', sku = '12000028231766872'))
