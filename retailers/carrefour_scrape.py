@@ -18,16 +18,14 @@ class Carrefour:
         price, store = [-1, None]
         r = self.get_response(url)
         script = BeautifulSoup(r.content, 'html.parser').find('script', {'type': 'application/ld+json'})
-        #print(r.content)
         try:
             data = json.loads(script.contents[0])
             price = float(data['offers']['offers'][0]['price'])
             store = data['offers']['offers'][0]['seller']['name']
         except Exception as e:
-            print(r.content)
-            print(e)
+           pass
         return price, store
-    
+
 if __name__ == '__main__':
     c = Carrefour()
-    c.scrape()
+    c.scrape('https://www.carrefour.com.br/notebook-lenovo-ideapad-3-82mfs00100-amd-ryzen-5-5500u-8gb-256-gb-hd-tela-15-6--linux-658929w-6589294/p')
