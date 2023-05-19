@@ -3,14 +3,16 @@ import re
 import requests
 from fake_useragent import UserAgent
 import re
+from requests_html import HTMLSession
 
 class AliExpress:
     def __init__(self) -> None:
         self.retailer_id = '39b03799-2054-4c80-a015-bd1b76358c57'
     def get_response(self, url):
         ua = str(UserAgent().chrome)
+        session = HTMLSession(browser_args=["--no-sandbox", "--user-agent="+ua])
         headers = {'User-Agent': ua}
-        r = requests.get(url, headers=headers)
+        r = session.get(url)
         return r
 
     def coupon_validation(self, description, product):
@@ -20,8 +22,12 @@ class AliExpress:
         sku_id = kwargs['sku']
         price = -1
         store = None
-        r = self.get_response(url)
+        ua = str(UserAgent().chrome)
+        session = HTMLSession(browser_args=["--no-sandbox", "--user-agent="+ua])
+        r = session.get(url)
         match = re.search(r'data: ({.+})', r.text).group(1)
+        r.close()
+        session.close()
         try:
             data = json.loads(match)
         except Exception as e:
