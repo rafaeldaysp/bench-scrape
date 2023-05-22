@@ -24,9 +24,8 @@ class Fastshop:
             price = r['result'][0]['products'][0]['skus'][0]['price']['payments'][0]['value']
         except:
             pass
-        print(price)
         return price, store
     
 if __name__ == '__main__':
     c = Fastshop()
-    c.scrape('https://www.fastshop.com.br/web/p/d/SGSMG990PTO_PRD/smartphone-samsung-galaxy-s21-fe-5g-preto-128gb-6gb-ram-e-camera-tripla-de-12mp12mp8mp', sku='3003744646_PRD')
+    c.scrape('https://tidd.ly/3BgvCJK', sku='3002057553_PRD')

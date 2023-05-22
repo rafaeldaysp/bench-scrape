@@ -36,4 +36,4 @@ class PontoFio:
 
 if __name__ == '__main__':
     c = PontoFio()
-    print(c.scrape('https://www.pontofrio.com.br/Informatica/Notebook/notebook-gamer-dell-g15-a0706-m40p-156-quot-fhd-amd-ryzen-7-6800h-16gb-512gb-ssd-nvidia-rtx-3060-windows-11-1545944459.html', sku='1545944459'))
+    print(c.scrape('https://tidd.ly/3nNCyep', sku='1554555531'))

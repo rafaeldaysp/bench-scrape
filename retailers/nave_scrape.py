@@ -21,7 +21,7 @@ class Nave:
         site = BeautifulSoup(response.content, 'html.parser')
         price = -1
         try:
-            price = float(site.find('span', class_='vtex-product-price-1-x-sellingPriceValue').text[3:].replace('.', '').replace(',', '.'))
+            price = float(site.find('span', class_='lojanave-product-price-0-x-currencyContainer').text[3:].replace('.', '').replace(',', '.'))
             price = price*0.95
         except Exception as e:
             print(e)

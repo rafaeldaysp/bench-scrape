@@ -1,6 +1,5 @@
 from api import api
 
-
 def run(product, Retailer):
     retailer_id = Retailer.retailer_id
     scrape = Retailer.scrape
@@ -26,6 +25,7 @@ def run(product, Retailer):
         for coupon in possible_coupons:
             if not coupon['minimum_spend']:
                 coupon['minimum_spend'] = 0
+            #print(full_price[0], coupon['minimum_spend'])
             if coupon['retailer_id'] == retailer_id and coupon['minimum_spend'] <= full_price[0] and coupon['available']:
                 discount = coupon['discount']
                 if '%' in discount:
@@ -36,7 +36,9 @@ def run(product, Retailer):
                     best_coupon_id = coupon['id']
                     best_discount_amount = discount
         data['coupon_id'] = best_coupon_id
-        data['price'] = int((price - best_discount_amount)*100)
+        cashbackValue = 0
+        if product['cashback']: cashbackValue = product['cashback']['value']
+        data['price'] = int((price - best_discount_amount)*(100 - cashbackValue))
         if data['price'] != product['price']  or data['available'] != product['available']:
             response = api.update_product_retailers(product['id'], retailer_id, data)
     else:

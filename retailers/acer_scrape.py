@@ -27,9 +27,8 @@ class Acer:
     def scrape(self, url, **kwargs):
         response = self.get_response(url)
         soup = BeautifulSoup(response.content, 'html.parser')
-        available_status = soup.find('span', class_='b vtex-rich-text-0-x-strong')
+        available_status = soup.find('span', class_='b vtex-rich-text-0-x-strong') or soup.find('div', class_='vtex-availability-notify-0-x-title t-body mb3')
         if available_status:
-            print('Indisponível')
             return -1, None
         coupons = soup.find_all('div', class_='vtex-flex-layout-0-x-flexColChild vtex-flex-layout-0-x-flexColChild--flagCoupon pb0')
         cupom_value = 0
