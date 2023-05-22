@@ -1,5 +1,5 @@
 import sys
-from retailers import aliexpress_scrape, acer_scrape, amazon_scrape, avell_scrape, carrefour_scrape, casasbahia_scrape, extra_scrape, girafa_scrape, kabum_scrape, lenovo_scrape, magalu_af_scrape, nave_scrape, fastshop_scrape, dell_scrape, pontofrio_scrape
+from retailers import aliexpress_scrape, acer_scrape, asus_scrape, amazon_scrape, avell_scrape, carrefour_scrape, casasbahia_scrape, extra_scrape, girafa_scrape, kabum_scrape, lenovo_scrape, magalu_af_scrape, nave_scrape, fastshop_scrape, dell_scrape, pontofrio_scrape
 from api import api
 import concurrent.futures
 import script
@@ -57,4 +57,6 @@ if __name__ == '__main__':
             javascriptRenderTrigger(pontofrio_scrape.PontoFio())
         if sys.argv[1] == '--extra':
             javascriptRenderTrigger(extra_scrape.Extra())
+        if sys.argv[1] == '--asus':
+            javascriptRenderTrigger(asus_scrape.Asus())
     

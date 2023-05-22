@@ -3,7 +3,7 @@ import json
 
 class Extra:
     def __init__(self) -> None:
-        self.retailer_id = '3a72a19e-54d9-45c5-ac34-1f3a2be5fb30'
+        self.retailer_id = '5e8ca825-31f8-4a0b-a6b6-2a8b0992c8a7'
     def coupon_validation(self, description, product):
         if description:
             description = json.loads(description)
@@ -15,7 +15,7 @@ class Extra:
         return True
 
     def scrape(self, url, **kwargs):
-        price, store = [-1, 'Casas Bahia']
+        price, store = [-1, 'Extra']
         try:
             sku = kwargs['sku']
             url_data = f'https://pdp-api.extra.com.br/api/v2/sku/{sku}/price/source/CB?utm_source=undefined&take=undefined&device_type=DESKTOP'
