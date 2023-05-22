@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import requests
+from requests_html import HTMLSession
 
 
 class Nave:
@@ -17,16 +18,25 @@ class Nave:
         return True
 
     def scrape(self, url, **kwargs):
-        response = self.get_response(url)
-        site = BeautifulSoup(response.content, 'html.parser')
+        ua = str(UserAgent().chrome)
+        session = HTMLSession(browser_args=["--no-sandbox", "--user-agent="+ua])
         price = -1
         try:
-            price = float(site.find('span', class_='lojanave-product-price-0-x-currencyContainer').text[3:].replace('.', '').replace(',', '.'))
-            price = price*0.95
+            r = session.get(url)
+            r.html.render(sleep=3)
         except Exception as e:
             print(e)
-            
+            price = -2
+            session.close()
+            return None, None
+        try:
+            price = float(BeautifulSoup(r.html.raw_html, 'html.parser').find('span', class_='lojanave-product-price-0-x-currencyContainer').text[3:].replace('.', '').replace(',', '.'))
+        except Exception as e:
+            print('Erro no produto da Nave', e)
+        r.close()
+        session.close()
         return price, 'Nave'
 
 if __name__ == '__main__':
     print(Nave().scrape('https://www.navegamer.com.br/notebook-gamer-nave-estelar-gm5ag0o/p'))
+    

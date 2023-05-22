@@ -48,7 +48,7 @@ if __name__ == '__main__':
         if sys.argv[1] == '--magaluparceiro':
            multithreadingTrigger(magalu_af_scrape.MagaluParceiro())
         if sys.argv[1] == '--nave':
-            multithreadingTrigger(nave_scrape.Nave())
+            javascriptRenderTrigger(nave_scrape.Nave())
         if sys.argv[1] == '--dell':
             multithreadingTrigger(dell_scrape.Dell())
         if sys.argv[1] == '--fastshop':
