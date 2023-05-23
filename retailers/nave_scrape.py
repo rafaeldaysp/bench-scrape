@@ -23,7 +23,7 @@ class Nave:
         price = -1
         try:
             r = session.get(url)
-            r.html.render(sleep=3)
+            r.html.render(sleep=5)
         except Exception as e:
             print(e)
             price = -2
