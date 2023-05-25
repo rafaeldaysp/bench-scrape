@@ -30,7 +30,7 @@ class Nave:
             session.close()
             return None, None
         try:
-            price = float(BeautifulSoup(r.html.raw_html, 'html.parser').find('span', class_='lojanave-product-price-0-x-currencyContainer').text[3:].replace('.', '').replace(',', '.'))
+            price = float(BeautifulSoup(r.html.raw_html, 'html.parser').find('span', class_='lojanave-product-price-0-x-sellingPriceValue').text[3:].replace('.', '').replace(',', '.'))
         except Exception as e:
             print('Erro no produto da Nave', e)
         r.close()
