@@ -41,7 +41,7 @@ def run(product, Retailer):
         data['price'] = int((price - best_discount_amount)*(100 - cashbackValue))
         if data['price'] != product['price']  or data['available'] != product['available']:
             response = api.update_product_retailers(product['id'], retailer_id, data)
-    else:
+    elif(product['available'] == True):
         data['available'] = False
         response = api.update_product_retailers(product['id'], retailer_id, data)
     
