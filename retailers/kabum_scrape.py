@@ -17,7 +17,10 @@ class Kabum:
 		}
             r = requests.get(url, headers=headers)
             return r
-    
+        
+    def bestCashbackFinder(self):
+        return None
+
     def coupon_validation(self, description, product):
         if description:
             description = json.loads(description)

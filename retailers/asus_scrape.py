@@ -7,6 +7,9 @@ class Asus:
         self.retailer_id = '19da6aa1-5f84-48b7-bdec-536a0798a520'
     def coupon_validation(self, description, product):
         return True
+    
+    def bestCashbackFinder(self):
+        return None
 
     def scrape(self, url, **kwargs):
         ua = str(UserAgent().chrome)

@@ -7,6 +7,9 @@ class Amazon:
         self.retailer_id = '04901ac7-2af9-42ad-8fb6-b3fe4e9bfea6'
     def coupon_validation(self, description, product):
         return True
+    
+    def bestCashbackFidner(self):
+        return None
 
     def scrape(self, url, **kwargs):
         price = -1

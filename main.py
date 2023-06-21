@@ -8,12 +8,14 @@ from requests_html import HTMLSession
 
 def multithreadingTrigger(Retailer):
     products = api.get_retailer_products(Retailer.retailer_id)
+    cashback = Retailer.bestCashbackFinder()
+    
     for product in products:
-        try:
-            script.run(product, Retailer)
-        except Exception as e:
-            print(e)
-    #concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products)) 
+        # try:
+            script.run(product, Retailer, cashback)
+        # except Exception as e:
+        #     print(e)
+    #concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products), [cashback]*len(products)) 
     
 def javascriptRenderTrigger(Retailer):
     ua = str(UserAgent().chrome)

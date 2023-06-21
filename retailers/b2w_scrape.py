@@ -5,6 +5,9 @@ from fake_useragent import UserAgent
 
 def coupon_validation(description, product):
     return True
+    
+def bestCashbackFinder(self):
+    return None
 
 def scrape(url, params=None):
     price, store = [-1, None]

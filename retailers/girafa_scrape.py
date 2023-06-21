@@ -10,6 +10,9 @@ class Girafa:
 
     def coupon_validation(self, description, product):
         return True
+    
+    def bestCashbackFinder(self):
+        return None
 
     def scrape(self, url, **kwargs):
         price = -1

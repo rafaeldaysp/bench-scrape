@@ -1,9 +1,10 @@
 from api import api
 
-def run(product, Retailer):
+def run(product, Retailer, cashback=None):
     retailer_id = Retailer.retailer_id
     scrape = Retailer.scrape
     coupon_validation = Retailer.coupon_validation
+    product['cashback'] = cashback
     data = {}
     price, store, *full_price = scrape(product['html_url'], product_id = product['id'], sku = product['dummy'], retailer_id = retailer_id)
     if not price:
@@ -37,10 +38,13 @@ def run(product, Retailer):
                     best_discount_amount = discount
         data['coupon_id'] = best_coupon_id
         cashbackValue = 0
-        if product['cashback']: cashbackValue = product['cashback']['value']
+        if product['cashback']: 
+            cashbackValue = product['cashback']['value']
+            data['cashback'] = cashback
         data['price'] = int((price - best_discount_amount)*(100 - cashbackValue))
-        if data['price'] != product['price']  or data['available'] != product['available']:
+        if data['price'] != product['price']  or data['available'] != product['available'] or 1:
             response = api.update_product_retailers(product['id'], retailer_id, data)
+            
     elif(product['available'] == True):
         data['available'] = False
         response = api.update_product_retailers(product['id'], retailer_id, data)

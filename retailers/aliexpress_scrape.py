@@ -16,6 +16,9 @@ class AliExpress:
     def coupon_validation(self, description, product):
         return True
 
+    def bestCashbackFinder(self):
+        return None
+
     def scrape(self, url, **kwargs):
         sku_id = kwargs['sku']
         price = -1
@@ -84,7 +87,7 @@ class AliExpress:
                 coupons_conditions.append(coupon_condition_value)
             coupons.sort()
             coupons_conditions.sort()
-        except:
+        except Exception as e:
             pass
         shop_discounts = []
         shop_discounts_conditions = []
@@ -145,4 +148,4 @@ class AliExpress:
 
 if __name__ == '__main__':
     aliexpress = AliExpress()
-    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_Dl9PRQD', sku = '12000031047942535'))
+    print(aliexpress.scrape('https://s.click.aliexpress.com/e/_DBS19Op', sku = '12000030020894292'))

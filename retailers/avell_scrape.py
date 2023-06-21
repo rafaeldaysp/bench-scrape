@@ -7,6 +7,9 @@ class Avell:
         self.retailer_id = 'd95b62cd-78c0-465f-8d6e-80151c3c567e'
     def coupon_validation(self, description, product):
         return True
+    
+    def bestCashbackFinder(self):
+        return None
 
     def scrape(self, url, **kwargs):
         ua = str(UserAgent().chrome)

@@ -36,7 +36,7 @@ class Lenovo:
             headers = {'User-Agent': ua}
             r = requests.get(url, headers=headers)
             return r
-    def bestCashbackFinder(self, productId):
+    def bestCashbackFinder(self):
         cashback = {}
         try:
             for cashbackProvider in self.cashbackProviders:
@@ -57,12 +57,12 @@ class Lenovo:
                             cashback = cashbackProvider
         except:
             print("erro na busca de cashbacks")
-        requests.patch(MAIN_URL + '/products/' + productId + '/retailers/' + self.retailer_id, json={"cashback": cashback}, headers={"api-key": API_KEY})
+            cashback = None
+            
         return cashback
 
     def scrape(self, url, **kwargs):
-        productId = kwargs['product_id']
-        self.bestCashbackFinder(productId)
+        
         price = -2
         site = BeautifulSoup(self.get_response(url).content, 'html.parser')
         try:

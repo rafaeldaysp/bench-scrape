@@ -8,6 +8,9 @@ class Fastshop:
          self.retailer_id = '601079a1-a602-4768-b395-9df49525c52d'
     def coupon_validation(self, description, product):
         return True
+    
+    def bestCashbackFinder(self):
+        return None
 
     def get_response(self, url):
             ua = str(UserAgent().chrome)

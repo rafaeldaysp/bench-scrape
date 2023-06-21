@@ -13,6 +13,9 @@ class Nave:
         headers = {'User-Agent': ua}
         r = requests.get(url, headers=headers)
         return r
+    
+    def bestCashbackFinder(self):
+        return None
 
     def coupon_validation(self, description, product):
         return True

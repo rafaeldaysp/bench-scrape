@@ -13,6 +13,9 @@ class PontoFio:
             except:
                 pass
         return True
+    
+    def bestCashbackFinder(self):
+        return None
 
     def scrape(self, url, **kwargs):
         price, store = [-1, 'Ponto Frio']

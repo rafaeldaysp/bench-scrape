@@ -41,5 +41,14 @@ def create_coupon(data):
 def delete_coupon(coupon_id):
     return requests.delete(MAIN_URL + '/coupons/' + coupon_id, headers=headers)
 
+def update_coupon(coupon_id, data):
+    return requests.patch(MAIN_URL + '/coupons/' + coupon_id, headers=headers, json=data)
+
+def update_product(product_id, data):
+    return requests.patch(MAIN_URL + '/products/' + product_id, headers=headers, json=data)
+
 def get_retailers():
     return json.loads(requests.get(MAIN_URL + '/retailers', headers=headers).text)
+
+def get_product_history(product_Id):
+    return json.loads(requests.get(f'{MAIN_URL}/products/{product_Id}/price-history', headers=headers).text)

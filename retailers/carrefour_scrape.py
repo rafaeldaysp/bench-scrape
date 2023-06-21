@@ -8,6 +8,9 @@ class Carrefour:
          self.retailer_id = '81e1e946-ffdf-4683-a3ba-022416cb46f8'
     def coupon_validation(self, description, product):
         return True
+    
+    def bestCashbackFinder(self):
+        return None
 
     def get_response(self, url):
             ua = str(UserAgent().chrome)
