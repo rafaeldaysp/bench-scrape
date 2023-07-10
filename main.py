@@ -12,6 +12,8 @@ def multithreadingTrigger(Retailer):
     
     for product in products:
         # try:
+            print("x--------------------------------------------------------------------------------------------x")
+            print(product['title'] + '\n')
             script.run(product, Retailer, cashback)
         # except Exception as e:
         #     print(e)
