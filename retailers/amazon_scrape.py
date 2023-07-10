@@ -8,7 +8,7 @@ class Amazon:
     def coupon_validation(self, description, product):
         return True
     
-    def bestCashbackFidner(self):
+    def bestCashbackFinder(self):
         return None
 
     def scrape(self, url, **kwargs):

@@ -30,7 +30,7 @@ class MagaluParceiro:
         price = -2
         soup = BeautifulSoup(response.text, 'html.parser')
         try:
-            price = soup.find('div', class_= 'p-price').find('strong').text.split(' ')[1][:-1]
+            price = soup.find('p', {"data-testid": "price-value"}).text[2:]
             price = float(price.replace('.', '').replace(',', '.'))
         except Exception as e:
             print(e)
