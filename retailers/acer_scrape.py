@@ -61,10 +61,18 @@ class Acer:
                 if product['id'] not in description:
                     return False
             except Exception as e:
-                print(e)
                 pass
         return True
-
+    
+    def cashback_validation(self, couponDescription, product):
+        if couponDescription:
+            try:
+                if product['cashback']['name'] in couponDescription:
+                    return False
+            except Exception as e:
+                pass
+        return True
+            
     def scrape(self, url, **kwargs):
         
         productId = kwargs['product_id']
@@ -107,12 +115,18 @@ class Acer:
                         api.delete_coupon(coupon['id'])
                 except:
                     pass
-        precos = soup.find_all('span', class_='vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--productPage-installments')
-        preco = precos[0].text
-        preco_value = float(preco[3:].replace('.', '').replace(',', '.'))
-        #preco_com_cupom = preco_value - cupom_value ## Na versão final, fazer a comparação entre cupons a partir do banco de dados
-        preco_final_pix = preco_value*0.88
+        
+        try:
+            precos = soup.find_all('span', class_='vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--productPage-installments')
+            preco = precos[0].text
+            preco_value = float(preco[3:].replace('.', '').replace(',', '.'))
+            #preco_com_cupom = preco_value - cupom_value ## Na versão final, fazer a comparação entre cupons a partir do banco de dados
+            preco_final_pix = preco_value*0.88
+        except Exception as e:
+            print(e)
+            return -1, None
 
+        
         return preco_final_pix, 'Acer'
 
 if __name__ == '__main__':
