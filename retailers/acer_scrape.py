@@ -5,6 +5,7 @@ import json
 from api import api
 from dotenv import load_dotenv
 from lxml import etree
+import re
 import os
 
 load_dotenv()
@@ -116,19 +117,21 @@ class Acer:
                 except:
                     pass
         
+            
+        #print(soup)
         try:
-            precos = soup.find_all('span', class_='vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--productPage-installments')
-            preco = precos[0].text
+            preco = soup.find('span', class_= 'vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--productPage-sellingPrice vtex-product-price-1-x-currencyContainer--productPage-sellingPrice-stickyInfoProducts').text
+            #preco = precos[0].text
             preco_value = float(preco[3:].replace('.', '').replace(',', '.'))
             #preco_com_cupom = preco_value - cupom_value ## Na versão final, fazer a comparação entre cupons a partir do banco de dados
             preco_final_pix = preco_value*0.88
         except Exception as e:
-            print(e)
-            return -1, None
+            print('Não foi possível encontrar o preço na página.')
+            return None, None
 
-        
+        print(preco_final_pix)
         return preco_final_pix, 'Acer'
 
 if __name__ == '__main__':
     acer = Acer()
-    acer.scrape('https://adsplay.g2afse.com/click?pid=10&offer_id=1&path=https://br-store.acer.com/notebook-acer-pt314-52s-761z-ci712700h-16gb-1tb-ssd-6g-gddr6-wnhasl64-gray-lcd-14-nh-qhmal-002/p', retailer_id = '54f99110-bc6a-4c4f-abf8-99299aba16dd', product_id = '72c29ade-c5ff-4bac-b7b8-57cdd4ea9e82')
+    acer.scrape('https://adsplay.g2afse.com/click?pid=10&offer_id=1&path=https://br-store.acer.com/notebook-acer-an517-54-56q0-ci511400h-8gb-1tb-256gb-ssd-4g-gddr6-wnhcsl64-black-17-3-fhd-nh-qegal-001/p', retailer_id = '54f99110-bc6a-4c4f-abf8-99299aba16dd', product_id = 'e3708b15-c0cb-41d0-9240-e0937f125d96')
