@@ -4,7 +4,8 @@ def run(product, Retailer, cashback=None):
     retailer_id = Retailer.retailer_id
     scrape = Retailer.scrape
     coupon_validation = Retailer.coupon_validation
-    product['cashback'] = cashback
+    
+    if ('PT316-51S-72XA' not in product['title']): product['cashback'] = cashback
     data = {}
     price, store, *full_price = scrape(product['html_url'], product_id = product['id'], sku = product['dummy'], retailer_id = retailer_id)
     if not price:
@@ -23,6 +24,7 @@ def run(product, Retailer, cashback=None):
                     possible_coupons.append(all_coupons[i])
         best_discount_amount = 0
         best_coupon_id = None
+        best_coupon_description = ''
         for coupon in possible_coupons:
             if not coupon['minimum_spend']:
                 coupon['minimum_spend'] = 0
@@ -36,9 +38,11 @@ def run(product, Retailer, cashback=None):
                 if discount > best_discount_amount:
                     best_coupon_id = coupon['id']
                     best_discount_amount = discount
+                    best_coupon_description = coupon['description'] if coupon['description'] else ''
+                    #print(best_coupon_description)
         data['coupon_id'] = best_coupon_id
         cashbackValue = 0
-        if product['cashback']: 
+        if product['cashback'] and product['cashback']['name'] not in best_coupon_description: 
             cashbackValue = product['cashback']['value']
             data['cashback'] = cashback
         data['price'] = int((price - best_discount_amount)*(100 - cashbackValue))
