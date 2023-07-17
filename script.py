@@ -4,8 +4,8 @@ def run(product, Retailer, cashback=None):
     retailer_id = Retailer.retailer_id
     scrape = Retailer.scrape
     coupon_validation = Retailer.coupon_validation
-    
-    if ('PT316-51S-72XA' not in product['title']): product['cashback'] = cashback
+    product['cashback'] = cashback
+    if ('PT316-51S-72XA' in product['title']): product['cashback'] = None
     data = {}
     price, store, *full_price = scrape(product['html_url'], product_id = product['id'], sku = product['dummy'], retailer_id = retailer_id)
     if not price:
