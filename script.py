@@ -1,4 +1,6 @@
 from api import api
+from datetime import date
+
 
 def run(product, Retailer, cashback=None):
     retailer_id = Retailer.retailer_id
@@ -6,6 +8,10 @@ def run(product, Retailer, cashback=None):
     coupon_validation = Retailer.coupon_validation
     product['cashback'] = cashback
     if ('PT316-51S-72XA' in product['title']): product['cashback'] = None
+    
+    today = date.today()
+    if today < date(2023, 7, 24) and retailer_id == '54f99110-bc6a-4c4f-abf8-99299aba16dd': product['cashback'] = None
+        
     data = {}
     price, store, *full_price = scrape(product['html_url'], product_id = product['id'], sku = product['dummy'], retailer_id = retailer_id)
     if not price:
