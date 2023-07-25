@@ -7,7 +7,12 @@ def run(product, Retailer, cashback=None):
     scrape = Retailer.scrape
     coupon_validation = Retailer.coupon_validation
     product['cashback'] = cashback
-    if ('PT316-51S-72XA' in product['title']): product['cashback'] = None
+    
+    
+    
+    ## regra nova
+    # 'PT316-51S-72XA' in product['title']
+    if 'PT316-51S-72XA' in product['title'] or (cashback and cashback['value'] < 5): product['cashback'] = ""
     
     today = date.today()
     if today < date(2023, 7, 24) and retailer_id == '54f99110-bc6a-4c4f-abf8-99299aba16dd': product['cashback'] = None
