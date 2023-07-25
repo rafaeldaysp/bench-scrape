@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from lxml import etree
 import re
 import os
+from requests_html import HTMLSession
 
 load_dotenv()
 
@@ -21,6 +22,13 @@ class Acer:
                 "url": "https://www.cuponomia.com.br/desconto/acer",
                 "xpath": "/html/body/section[1]/div[1]/div[1]/div/aside/a/span",
                 "xpath2": "/html/body/section[2]/div[1]/div[1]/div/aside/a/span",
+            },
+            {
+                "name": "Meliuz",
+                "affiliatedLink": "https://www.meliuz.com.br/i/ref_bae7d6a1?ref_source=2",
+                "url": "https://www.meliuz.com.br/desconto/cupom-acer",
+                "xpath": "/html/body/div[3]/div[4]/button",
+                "xpath2": "/html/body/div[3]/div[4]/button",
             }
         ]
     
@@ -29,13 +37,22 @@ class Acer:
         try:
             for cashbackProvider in self.cashbackProviders:
                 r = self.get_response(cashbackProvider["url"])
-                soup = BeautifulSoup(r.content, "html.parser")
+                soup = BeautifulSoup(r.content, "html.parser")   
 
                 dom = etree.HTML(str(soup))
+                
                 try: cashbackFullLabelArray = dom.xpath(cashbackProvider["xpath"])[0].text.split(" ")
-                except: cashbackFullLabelArray = dom.xpath(cashbackProvider["xpath2"])[0].text.split(" ")
+                except:
+                    try: cashbackFullLabelArray = dom.xpath(cashbackProvider["xpath2"])[0].text.split(" ")
+                    except: pass
 
-
+                
+                ## gambiarra
+                cashback_from_coupon = api.get_coupon('a4e0d2ba-b3ae-41f0-ba3f-fe63a9aefe94')
+                if cashbackProvider['name'] == 'Meliuz':
+                    cashbackFullLabelArray = [cashback_from_coupon['discount']]
+                ## 
+        
                 for label in cashbackFullLabelArray:
                     if "%" in label:
                         cashbackProvider["value"] = float(
