@@ -6,10 +6,8 @@ def run(product, Retailer, cashback=None):
     retailer_id = Retailer.retailer_id
     scrape = Retailer.scrape
     coupon_validation = Retailer.coupon_validation
-    # product['cashback'] = cashback
+    product['cashback'] = cashback
     
-    
-    product['cashback'] = ""
     ## regra nova
     # 'PT316-51S-72XA' in product['title']
     if 'PT316-51S-72XA' in product['title'] or (cashback and cashback['value'] < 5): product['cashback'] = ""
@@ -53,7 +51,9 @@ def run(product, Retailer, cashback=None):
                     #print(best_coupon_description)
         data['coupon_id'] = best_coupon_id
         cashbackValue = 0
-        if product['cashback'] and product['cashback']['name'] not in best_coupon_description : 
+        if 'CASHBACKNOTALLOWED' in best_coupon_description:
+            data['cashback'] = ''
+        elif product['cashback'] and product['cashback']['name'] not in best_coupon_description : 
             cashbackValue = product['cashback']['value']
             data['cashback'] = cashback
         data['price'] = int((price - best_discount_amount)*(100 - cashbackValue))
