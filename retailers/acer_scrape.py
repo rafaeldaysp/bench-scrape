@@ -60,10 +60,11 @@ class Acer:
                         )
                         if not cashback or cashback["value"] < cashbackProvider["value"]:
                             cashback = cashbackProvider
+                print(cashback)
         except Exception as e:
             print("erro na busca de cashbacks", e)
             cashback = None
-
+        
         return cashback
     
     def get_response(self, url):
@@ -76,6 +77,7 @@ class Acer:
         if description:
             try:
                 #description = json.loads(description)
+                if description == 'CASHBACKNOTALLOWED': return True 
                 if product['id'] not in description:
                     return False
             except Exception as e:
@@ -115,7 +117,9 @@ class Acer:
                     flag = 0
                     for serverCoupon in server_coupons:
                         if serverCoupon['code'].upper() == data['code'].upper():
-                            coupon_description = json.loads(serverCoupon['description'])
+                            print(serverCoupon['code'], data['code'])
+                            
+                            coupon_description = serverCoupon['description']
                             if kwargs['product_id'] not in coupon_description:
                                 newCouponDescription = coupon_description +" "+ kwargs['product_id']
                                 newCouponDescriptionStr = json.dumps(newCouponDescription)
