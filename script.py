@@ -10,10 +10,9 @@ def run(product, Retailer, cashback=None):
     
     ## regra nova
     # 'PT316-51S-72XA' in product['title']
-    if 'PT316-51S-72XA' in product['title'] or (cashback and cashback['value'] < 5): product['cashback'] = ""
+    if 'PT316-51S-72XA' in product['title'] or (cashback and cashback['value'] < 5 and product['price'] < 1000000): product['cashback'] = ""
     
-    today = date.today()
-    if today < date(2023, 7, 24) and retailer_id == '54f99110-bc6a-4c4f-abf8-99299aba16dd': product['cashback'] = None
+    print(product['cashback'])
         
     data = {}
     price, store, *full_price = scrape(product['html_url'], product_id = product['id'], sku = product['dummy'], retailer_id = retailer_id)
