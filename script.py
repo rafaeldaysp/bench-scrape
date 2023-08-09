@@ -10,7 +10,7 @@ def run(product, Retailer, cashback=None):
     
     ## regra nova
     # 'PT316-51S-72XA' in product['title']
-    #if 'PT316-51S-72XA' in product['title'] or (cashback and cashback['value'] < 5 and product['price'] < 1000000): product['cashback'] = ""
+    if (cashback and cashback['value'] < 5 and product['price'] < 1000000): product['cashback'] = ""
     
     print(product['cashback'])
         
