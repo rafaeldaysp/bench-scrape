@@ -6,13 +6,13 @@ def run(product, Retailer, cashback=None):
     retailer_id = Retailer.retailer_id
     scrape = Retailer.scrape
     coupon_validation = Retailer.coupon_validation
-    product['cashback'] = cashback
     
     ## regra nova
     # 'PT316-51S-72XA' in product['title']
-    if (cashback and cashback['value'] < 5 and product['price'] < 1000000): product['cashback'] = ""
-    
-    print(product['cashback'])
+    if (cashback and cashback['value'] < 5 and product['price'] < 1000000):
+        cashback = None
+        
+    print('cashback: ', cashback)
         
     data = {}
     price, store, *full_price = scrape(product['html_url'], product_id = product['id'], sku = product['dummy'], retailer_id = retailer_id)
@@ -25,6 +25,7 @@ def run(product, Retailer, cashback=None):
         data['available'] = True
         data['price'] = int(price*100)
         data['store'] = store
+        data['cashback'] = ''
         all_coupons = api.get_coupons(retailer_id)
         possible_coupons = []
         for i in range(len(all_coupons)):
@@ -50,13 +51,11 @@ def run(product, Retailer, cashback=None):
                     #print(best_coupon_description)
         data['coupon_id'] = best_coupon_id
         cashbackValue = 0
-        if 'CASHBACKNOTALLOWED' in best_coupon_description:
-            data['cashback'] = ''
-        elif product['cashback'] and product['cashback']['name'] not in best_coupon_description : 
-            cashbackValue = product['cashback']['value']
+        if cashback and 'CASHBACKNOTALLOWED' not in best_coupon_description:
+            cashbackValue = cashback['value']
             data['cashback'] = cashback
         data['price'] = int((price - best_discount_amount)*(100 - cashbackValue))
-        if data['price'] != product['price']  or data['available'] != product['available']:
+        if data['price'] != product['price']  or data['available'] != product['available'] or 1:
             response = api.update_product_retailers(product['id'], retailer_id, data)
             
     elif(product['available'] == True):
