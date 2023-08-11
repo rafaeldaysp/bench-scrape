@@ -27,7 +27,7 @@ class Samsung:
         # fullPrice = None
         try:
             r = session.get(url)
-            r.html.render(sleep=5)
+            r.html.render(sleep=8)
         except Exception as e:
             print(e)
             price = -2
