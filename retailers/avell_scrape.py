@@ -31,14 +31,17 @@ class Avell:
             session.close()
             return None, None
         try:
-            price = float(BeautifulSoup(r.html.raw_html, 'html.parser').find_all('h3', class_='MuiTypography-root MuiTypography-h3')[0].text.replace('.', '').replace(',', '.'))
+            price = float(BeautifulSoup(r.html.raw_html, 'html.parser').find_all('p', class_='MuiTypography-root jss329 MuiTypography-body1')[0].text.replace('\xa0', '')[2:].replace('.', '').replace(',', '.'))
         except Exception as e:
             print('Erro no produto da Avell', e)
         r.close()
         session.close()
-        return price, 'Avell'
+        
+        priceWithPixDiscount = price * 0.9
+        
+        return priceWithPixDiscount, 'Avell'
 
 if __name__ == '__main__':
     avell = Avell()
-    price = avell.scrape('https://avell.com.br/avell-storm-two')
+    price = avell.scrape('https://avell.com.br/storm-go-i7-rtx4060?utm_source=rakuten&utm_medium=afiliados&utm_campaign=3982103&utm_content=HWP._f3BEF0-sN6JAuI_Of0GhA5.9ehQ0Q&ranMID=50236&ranEAID=HWP*%2Ff3BEF0&ranSiteID=HWP._f3BEF0-sN6JAuI_Of0GhA5.9ehQ0Q')
     print(price)
