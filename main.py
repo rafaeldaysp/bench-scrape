@@ -1,5 +1,5 @@
 import sys
-from retailers import aliexpress_scrape, acer_scrape, asus_scrape, amazon_scrape, avell_scrape, carrefour_scrape, casasbahia_scrape, extra_scrape, girafa_scrape, kabum_scrape, lenovo_scrape, magalu_af_scrape, nave_scrape, fastshop_scrape, dell_scrape, pontofrio_scrape
+from retailers import aliexpress_scrape, acer_scrape, asus_scrape, amazon_scrape, avell_scrape, carrefour_scrape, casasbahia_scrape, extra_scrape, girafa_scrape, kabum_scrape, lenovo_scrape, magalu_af_scrape, nave_scrape, fastshop_scrape, dell_scrape, pontofrio_scrape, samsung_scrape
 from api import api
 import concurrent.futures
 import script
@@ -9,7 +9,7 @@ from requests_html import HTMLSession
 def multithreadingTrigger(Retailer):
     products = api.get_retailer_products(Retailer.retailer_id)
     cashback = Retailer.bestCashbackFinder()
-    
+    #products = [product for product in products if 'STRIX' in product['title']]
     for product in products:
         # try:
             print("x--------------------------------------------------------------------------------------------x")
@@ -63,4 +63,7 @@ if __name__ == '__main__':
             javascriptRenderTrigger(extra_scrape.Extra())
         if sys.argv[1] == '--asus':
             javascriptRenderTrigger(asus_scrape.Asus())
+        if sys.argv[1] == '--samsung':
+            javascriptRenderTrigger(samsung_scrape.Samsung())
+        
     
