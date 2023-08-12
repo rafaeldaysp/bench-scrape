@@ -23,7 +23,7 @@ class Samsung:
     def scrape(self, url, **kwargs):
         ua = str(UserAgent().chrome)
         session = HTMLSession(browser_args=["--no-sandbox", "--user-agent="+ua])
-        price = -1
+        price = None
         # fullPrice = None
         try:
             r = session.get(url)
