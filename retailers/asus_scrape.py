@@ -32,4 +32,4 @@ class Asus:
         return price, 'Asus'
 
 if __name__ == '__main__':
-    print(Asus().scrape('https://compre.vc/v2/13895e0ace5'))
+    print(Asus().scrape('https://br.store.asus.com/notebook-asus-vivobook-m1502ia.html?utm_term=23078451&utm_source=lomadee&utm_medium=afiliado&utm_campaign=cpa&lmdsid=NjExMSwzNzQ1NTkxNywxNjkxODY2MTk2MzE3LG51bGwsNzg5NywyMDI0NjczNmMwZSwlmdhjacfrlaalrfweal'))

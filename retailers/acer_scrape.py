@@ -155,4 +155,4 @@ class Acer:
 
 if __name__ == '__main__':
     acer = Acer()
-    acer.scrape('https://adsplay.g2afse.com/click?pid=10&offer_id=1&path=https://br-store.acer.com/notebook-acer-an517-54-56q0-ci511400h-8gb-1tb-256gb-ssd-4g-gddr6-wnhcsl64-black-17-3-fhd-nh-qegal-001/p', retailer_id = '54f99110-bc6a-4c4f-abf8-99299aba16dd', product_id = 'e3708b15-c0cb-41d0-9240-e0937f125d96')
+    print(acer.scrape('https://br-store.acer.com/notebook-acer-an517-54-55vm-ci511400h-8gb-512gb-ssd-4g-gddr6-wnhcsl64-black-17-3-fhd-nh-qefal-001/p', product_id = '9d61a6a7-bf7a-4cd8-b034-3eed009b9788'))

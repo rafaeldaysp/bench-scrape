@@ -1,0 +1,6 @@
+venv
+__pycache__
+clear.py
+main.py
+promocoes-sem-produtos.txt
+*.pv.py

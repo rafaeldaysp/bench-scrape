@@ -38,6 +38,7 @@ class Nave:
             print('Erro no produto da Nave', e)
         r.close()
         session.close()
+        print(price)
         return price, 'Nave'
 
 if __name__ == '__main__':

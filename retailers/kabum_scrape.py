@@ -22,19 +22,20 @@ class Kabum:
         return None
 
     def coupon_validation(self, description, product):
-        if description:
-            description = json.loads(description)
-            try:
-                if product['category']['name'] not in description['category']:
-                    return False
-            except:
-                pass
-            try:
-                if product['id'] not in description['product_id']:
-                    return False
-            except:
-                pass
-        return True
+        # if description:
+        #     description = json.loads(description)
+        #     try:
+        #         if product['category']['name'] not in description['category']:
+        #             return False
+        #     except:
+        #         pass
+        #     try:
+        #         if product['id'] not in description['product_id']:
+        #             return False
+        #     except:
+        #         pass
+        # return True
+        return False
 
     def scrape(self, url, **kwargs):
         price = -1
