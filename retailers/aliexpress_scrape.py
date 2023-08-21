@@ -10,8 +10,14 @@ class AliExpress:
     def get_response(self, url):
         ua = str(UserAgent().chrome)
         headers = {'User-Agent': ua}
-        r = requests.get(url, headers=headers, proxies={'http': '206.42.55.98:3128', 'https': '206.42.55.98:3128'}, timeout=10)
-        return r
+        with open('proxies-list.txt', 'r') as f:
+            proxies = f.read().split('\n')
+            for proxy in proxies:
+                try:
+                    r = requests.get(url, headers=headers, proxies={'http': proxy, 'https': proxy}, timeout=20)
+                    return r
+                except: pass
+        return False
 
     def coupon_validation(self, description, product):
         return True
@@ -24,6 +30,8 @@ class AliExpress:
         price = -1
         store = None
         r = self.get_response(url)
+
+        if not r: return None, None
         
         try:
             match = re.search(r'data: ({.+})', r.text).group(1)
