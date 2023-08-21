@@ -17,6 +17,7 @@ class AliExpress:
                     r = requests.get(url, headers=headers, proxies={'http': proxy, 'https': proxy}, timeout=20)
                     return r
                 except: pass
+        print('Nenhum proxy funcionou.')
         return False
 
     def coupon_validation(self, description, product):
