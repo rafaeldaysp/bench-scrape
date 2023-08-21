@@ -11,7 +11,7 @@ class AliExpress:
     def get_response(self, url):
         ua = str(UserAgent().chrome)
         headers = {'User-Agent': ua}
-        with open('proxies-list.txt', 'r') as f:
+        with open('/home/bboyrafinhazika/bench-scrape/proxies-list.txt', 'r') as f:
             proxies = f.read().split('\n')
             np.random.shuffle(proxies)
             for proxy in proxies:
