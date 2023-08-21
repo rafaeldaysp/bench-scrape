@@ -19,7 +19,7 @@ def run(product, Retailer, cashback=None):
     if not price:
         print('Erro em: ', product['title'])
         return
-    if not full_price:
+    if not full_price or not full_price:
         full_price = [price]
     if price > 0:
         data['available'] = True

@@ -10,7 +10,7 @@ class AliExpress:
     def get_response(self, url):
         ua = str(UserAgent().chrome)
         headers = {'User-Agent': ua}
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=headers, proxies={'http': '206.42.55.98:3128', 'https': '206.42.55.98:3128'})
         return r
 
     def coupon_validation(self, description, product):
