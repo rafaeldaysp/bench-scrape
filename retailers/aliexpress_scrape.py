@@ -3,6 +3,7 @@ import re
 import requests
 from fake_useragent import UserAgent
 import re
+import numpy as np
 
 class AliExpress:
     def __init__(self) -> None:
@@ -12,6 +13,7 @@ class AliExpress:
         headers = {'User-Agent': ua}
         with open('proxies-list.txt', 'r') as f:
             proxies = f.read().split('\n')
+            np.random.shuffle(proxies)
             for proxy in proxies:
                 try:
                     r = requests.get(url, headers=headers, proxies={'http': proxy, 'https': proxy}, timeout=20)
