@@ -3,7 +3,7 @@ import re
 import requests
 from fake_useragent import UserAgent
 import re
-import numpy as np
+# import numpy as np
 
 class AliExpress:
     def __init__(self) -> None:
@@ -11,12 +11,12 @@ class AliExpress:
     def get_response(self, url):
         ua = str(UserAgent().chrome)
         headers = {'User-Agent': ua}
-        with open('/home/bboyrafinhazika/bench-scrape/proxies-list.txt', 'r') as f:
+        with open('proxies-list.txt', 'r') as f:
             proxies = f.read().split('\n')
-            np.random.shuffle(proxies)
+            # np.random.shuffle(proxies)
             for proxy in proxies:
                 try:
-                    r = requests.get(url, headers=headers, proxies={'http': proxy, 'https': proxy}, timeout=20)
+                    r = requests.get(url, headers=headers)#, proxies={'http': proxy, 'https': proxy}, timeout=20)
                     return r
                 except: pass
         print('Nenhum proxy funcionou.')
