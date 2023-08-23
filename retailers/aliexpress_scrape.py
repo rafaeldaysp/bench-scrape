@@ -8,20 +8,26 @@ import re
 class AliExpress:
     def __init__(self) -> None:
         self.retailer_id = '39b03799-2054-4c80-a015-bd1b76358c57'
+    # def get_response_with_proxies(self, url):
+    #     ua = str(UserAgent().chrome)
+    #     headers = {'User-Agent': ua}
+    #     with open('proxies-list.txt', 'r') as f:
+    #         proxies = f.read().split('\n')
+    #         # np.random.shuffle(proxies)
+    #         for proxy in proxies:
+    #             try:
+    #                 r = requests.get(url, headers=headers)#, proxies={'http': proxy, 'https': proxy}, timeout=20)
+    #                 return r
+    #             except: pass
+    #     print('Nenhum proxy funcionou.')
+    #     return False
+
     def get_response(self, url):
         ua = str(UserAgent().chrome)
         headers = {'User-Agent': ua}
-        with open('proxies-list.txt', 'r') as f:
-            proxies = f.read().split('\n')
-            # np.random.shuffle(proxies)
-            for proxy in proxies:
-                try:
-                    r = requests.get(url, headers=headers)#, proxies={'http': proxy, 'https': proxy}, timeout=20)
-                    return r
-                except: pass
-        print('Nenhum proxy funcionou.')
-        return False
-
+        r = requests.get(url, headers=headers)
+        return r
+    
     def coupon_validation(self, description, product):
         return True
 
