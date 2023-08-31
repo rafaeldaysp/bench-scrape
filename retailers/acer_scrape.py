@@ -141,7 +141,7 @@ class Acer:
             
         #print(soup)
         try:
-            preco = soup.find('span', class_= 'vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--productPage-sellingPrice vtex-product-price-1-x-currencyContainer--productPage-sellingPrice-stickyInfoProducts').text
+            preco = soup.find('span', class_= 'vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--shelfSpotPrice').text
             #preco = precos[0].text
             preco_value = float(preco[3:].replace('.', '').replace(',', '.'))
             #preco_com_cupom = preco_value - cupom_value ## Na versão final, fazer a comparação entre cupons a partir do banco de dados
@@ -151,7 +151,7 @@ class Acer:
             return None, None
 
         print(preco_final_pix)
-        return preco_final_pix, 'Acer'
+        return preco_value, 'Acer'
 
 if __name__ == '__main__':
     acer = Acer()
