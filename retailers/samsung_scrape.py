@@ -2,11 +2,28 @@ from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import requests
 from requests_html import HTMLSession
-
+from lxml import etree
+from api import api
 
 class Samsung:
     def __init__(self) -> None:
         self.retailer_id = '908ee6f0-2d53-4fb3-b0aa-80970c2efb22'
+        self.cashbackProviders = [
+            {
+                "name": "Cuponomia",
+                "affiliatedLink": "https://www.cuponomia.com.br/ref/a8a8ec1cba89",
+                "url": "https://www.cuponomia.com.br/desconto/samsung",
+                "xpath": "/html/body/section[1]/div[1]/div[1]/div/aside/a/span",
+                "xpath2": "/html/body/section[2]/div[1]/div[1]/div/aside/a/span",
+            },
+            {
+                "name": "Meliuz",
+                "affiliatedLink": "https://www.meliuz.com.br/i/ref_bae7d6a1?ref_source=2",
+                "url": "https://www.meliuz.com.br/desconto/cupom-samsung",
+                "xpath": "/html/body/div[3]/div[4]/button",
+                "xpath2": "/html/body/div[3]/div[4]/button",
+            }
+        ]
 
     def get_response(self, url):
         ua = str(UserAgent().chrome)
@@ -15,7 +32,39 @@ class Samsung:
         return r
     
     def bestCashbackFinder(self):
-        return None
+        cashback = {}
+        try:
+            for cashbackProvider in self.cashbackProviders:
+                r = self.get_response(cashbackProvider["url"])
+                soup = BeautifulSoup(r.content, "html.parser")   
+
+                dom = etree.HTML(str(soup))
+                
+                try: cashbackFullLabelArray = dom.xpath(cashbackProvider["xpath"])[0].text.split(" ")
+                except:
+                    try: cashbackFullLabelArray = dom.xpath(cashbackProvider["xpath2"])[0].text.split(" ")
+                    except: pass
+
+                
+                ## gambiarra
+                # cashback_from_coupon = api.get_coupon('a4e0d2ba-b3ae-41f0-ba3f-fe63a9aefe94')
+                # if cashbackProvider['name'] == 'Meliuz':
+                #     cashbackFullLabelArray = [cashback_from_coupon['discount']]
+                ## 
+        
+                for label in cashbackFullLabelArray:
+                    if "%" in label:
+                        cashbackProvider["value"] = float(
+                            label[: label.find("%")].replace(",", ".")
+                        )
+                        if not cashback or cashback["value"] < cashbackProvider["value"]:
+                            cashback = cashbackProvider
+                print(cashback)
+        except Exception as e:
+            print("erro na busca de cashbacks", e)
+            cashback = None
+        
+        return cashback
 
     def coupon_validation(self, description, product):
         return True
