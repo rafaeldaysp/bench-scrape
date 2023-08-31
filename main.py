@@ -20,14 +20,14 @@ def multithreadingTrigger(Retailer):
     #concurrent.futures.ThreadPoolExecutor().map(script.run, products, [Retailer]*len(products), [cashback]*len(products)) 
     
 def javascriptRenderTrigger(Retailer):
-    ua = str(UserAgent().chrome)
-    session = HTMLSession(browser_args=["--no-sandbox", "--user-agent="+ua])
-    session.get('https://google.com/').html.render()
-    session.close()
-    
+    # ua = str(UserAgent().chrome)
+    # session = HTMLSession(browser_args=["--no-sandbox", "--user-agent="+ua])
+    # session.get('https://benchpromos.com/').html.render()
+    # session.close()
+    cashback = Retailer.bestCashbackFinder()
     products = api.get_retailer_products(Retailer.retailer_id)
     for product in products:
-        script.run(product, Retailer)
+        script.run(product, Retailer, cashback)
 
 if __name__ == '__main__':
     
