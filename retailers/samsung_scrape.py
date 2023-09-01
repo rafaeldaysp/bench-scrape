@@ -87,9 +87,6 @@ class Samsung:
             price = float(BeautifulSoup(r.html.raw_html, 'html.parser').find('span', class_='samsungbr-app-pdp-2-x-spotPrice').text[3:].replace('.', '').replace(',', '.'))
         except Exception as e:
             print('Erro no produto da Samsung', e)
-            f = open(kwargs['product_id'], 'w')
-            f.write(str(r.html.raw_html))
-            f.close()
         r.close()
         session.close()
         return price, 'Samsung'
