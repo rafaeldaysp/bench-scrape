@@ -47,6 +47,9 @@ def update_coupon(coupon_id, data):
 def update_product(product_id, data):
     return requests.patch(MAIN_URL + '/products/' + product_id, headers=headers, json=data)
 
+def update_product_history(product_id, data):
+    return requests.patch(MAIN_URL + '/products/' + product_id + '/price-history', headers=headers, json=data)
+
 def get_retailers():
     return json.loads(requests.get(MAIN_URL + '/retailers', headers=headers).text)
 
