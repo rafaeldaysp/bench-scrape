@@ -23,8 +23,11 @@ class Asus:
             price = -2
             session.close()
             return None, None
+        soup = BeautifulSoup(r.html.raw_html, 'html.parser')
+        
         try:
-            price = float(BeautifulSoup(r.html.raw_html, 'html.parser').find('span', class_='price').text[3:].replace('.', '').replace(',', '.'))
+            price_tag = soup.find('meta', {'itemprop': 'price'})['content']
+            price = float(price_tag)
         except Exception as e:
             print('Erro no produto da Asus', e)
         r.close()
@@ -32,4 +35,4 @@ class Asus:
         return price, 'Asus'
 
 if __name__ == '__main__':
-    print(Asus().scrape('https://br.store.asus.com/notebook-asus-vivobook-m1502ia.html?utm_term=23078451&utm_source=lomadee&utm_medium=afiliado&utm_campaign=cpa&lmdsid=NjExMSwzNzQ1NTkxNywxNjkxODY2MTk2MzE3LG51bGwsNzg5NywyMDI0NjczNmMwZSwlmdhjacfrlaalrfweal'))
+    print(Asus().scrape('https://compre.vc/v2/2508327aa49'))
