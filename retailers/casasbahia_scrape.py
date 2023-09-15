@@ -18,12 +18,12 @@ class CasasBahia:
         return None
 
     def scrape(self, url, **kwargs):
-        price, store = [-1, 'Casas Bahia']
+        price, store = [None, 'Casas Bahia']
         try:
             sku = kwargs['sku']
             url_data = f'https://pdp-api.casasbahia.com.br/api/v2/sku/{sku}/price/source/CB?utm_source=undefined&take=undefined&device_type=DESKTOP'
             session2 = HTMLSession(browser_args=["--no-sandbox", "--user-agent=Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.14 Safari/534.24"])
-            r2 = session2.get(url_data)
+            r2 = session2.get(url_data, )
             r2.html.render(sleep=2)
             json_data = json.loads(r2.html.html[r2.html.html.find('{'):r2.html.html.rfind('}')+1])
             r2.close()
@@ -31,7 +31,7 @@ class CasasBahia:
             price, store = [json_data['paymentMethodDiscount']['sellPriceWithDiscount'], json_data['sellers'][0]['name']]
         except Exception as e:
             #print('Scraping Casas Bahia bad request: ', e)
-            price = -1
+            price = None
             #print(r.html.html)
             pass
         return price, store
