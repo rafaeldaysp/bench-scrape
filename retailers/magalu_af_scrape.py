@@ -17,9 +17,9 @@ class MagaluParceiro:
             return r
     def coupon_validation(self, description, product):
         if description:
-            description = json.loads(description)
             try:
-                if product['category']['name'] not in description['category']:
+                if description == 'CASHBACKNOTALLOWED': return True 
+                if product['id'] not in description:
                     return False
             except:
                 pass
