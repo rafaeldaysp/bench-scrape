@@ -27,7 +27,7 @@ class MagaluParceiro:
 
     def scrape(self, url, **kwargs):
         response = self.get_response(url)
-        price = -2
+        price = None
         soup = BeautifulSoup(response.text, 'html.parser')
         try:
             price = soup.find('p', {"data-testid": "price-value"}).text[2:]
@@ -37,4 +37,4 @@ class MagaluParceiro:
         return price, 'Magalu'
 
 if __name__ == '__main__':
-    print(MagaluParceiro().scrape('https://www.magazinevoce.com.br/magazineotcm/monitor-gamer-lg-24-hdmidisplayport-led-full-hd-144hz-1ms-mbr-freesync-ajuste-de-inclinacao/p/edfj76cbh5/IN/MNPC/'))
+    print(MagaluParceiro().scrape('https://www.magazinevoce.com.br/magazineotcm/smartphone-samsung-galaxy-m54-5g-256gb-8gb-ram-tela-infinita-de-6-7-dual-chip/p/he5hba891j/te/galx/'))
