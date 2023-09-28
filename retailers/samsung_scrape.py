@@ -47,9 +47,9 @@ class Samsung:
 
                 
                 ## gambiarra
-                # cashback_from_coupon = api.get_coupon('a4e0d2ba-b3ae-41f0-ba3f-fe63a9aefe94')
-                # if cashbackProvider['name'] == 'Meliuz':
-                #     cashbackFullLabelArray = [cashback_from_coupon['discount']]
+                cashback_from_coupon = api.get_coupon('cbc460ce-6aa4-4f4f-bce4-79092eba6439')
+                if cashbackProvider['name'] == 'Meliuz':
+                    cashbackFullLabelArray = [cashback_from_coupon['discount']]
                 ## 
         
                 for label in cashbackFullLabelArray:
