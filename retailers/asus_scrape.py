@@ -6,7 +6,7 @@ class Asus:
     def __init__(self) -> None:
         self.retailer_id = '19da6aa1-5f84-48b7-bdec-536a0798a520'
     def coupon_validation(self, description, product):
-        return True
+        return True 
     
     def bestCashbackFinder(self):
         return None
@@ -17,7 +17,7 @@ class Asus:
         price = -1
         try:
             r = session.get(url)
-            r.html.render(sleep=8)
+            r.html.render(sleep=8, timeout=20)
         except Exception as e:
             print(e)
             price = -2
@@ -35,4 +35,4 @@ class Asus:
         return price, 'Asus'
 
 if __name__ == '__main__':
-    print(Asus().scrape('https://compre.vc/v2/2508327aa49'))
+    print(Asus().scrape('https://br.store.asus.com/notebook-asus-vivobook-16x-k3605zf-n1198w-preto.html?utm_term=23078451&utm_source=lomadee&utmi_cp=lomadee&utm_medium=afiliado&utm_campaign=cpa&lmdsid=NjExMSwzNzQ1NTkxNywxNjk2NTE0MjExMjk4LG51bGwsNzg5NywyMzIxZWI5ZmQwNiwlmdhjacfrlaalrfweal'))
