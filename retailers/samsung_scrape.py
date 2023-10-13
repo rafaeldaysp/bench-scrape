@@ -9,13 +9,13 @@ class Samsung:
     def __init__(self) -> None:
         self.retailer_id = '908ee6f0-2d53-4fb3-b0aa-80970c2efb22'
         self.cashbackProviders = [
-            {
-                "name": "Cuponomia",
-                "affiliatedLink": "https://www.cuponomia.com.br/ref/a8a8ec1cba89",
-                "url": "https://www.cuponomia.com.br/desconto/samsung",
-                "xpath": "/html/body/section[1]/div[1]/div[1]/div/aside/a/span",
-                "xpath2": "/html/body/section[2]/div[1]/div[1]/div/aside/a/span",
-            },
+            # {
+            #     "name": "Cuponomia",
+            #     "affiliatedLink": "https://www.cuponomia.com.br/ref/a8a8ec1cba89",
+            #     "url": "https://www.cuponomia.com.br/desconto/samsung",
+            #     "xpath": "/html/body/section[1]/div[1]/div[1]/div/aside/a/span",
+            #     "xpath2": "/html/body/section[2]/div[1]/div[1]/div/aside/a/span",
+            # },
             {
                 "name": "Meliuz",
                 "affiliatedLink": "https://www.meliuz.com.br/i/ref_bae7d6a1?ref_source=2",
